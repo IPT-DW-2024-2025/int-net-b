@@ -27,6 +27,49 @@ public class HomeController : Controller
     {
         return View();
     }
+    
+    [HttpPost]
+    public IActionResult Introducao(string num1, string num2, string op)
+    {
+        double aux1, aux2, resultado = 0;
+        
+        double.TryParse(num1, out aux1);
+        double.TryParse(num2, out aux2);
+
+        switch (op)
+        {
+            case "+":
+                resultado = aux1 + aux2;
+                break;
+            
+            case "-":
+                resultado = aux1 - aux2;
+                break;
+            case "*":
+                resultado = aux1 * aux2;
+                break;
+            case "/":
+                if (aux2 == 0)
+                {
+                    ViewBag.erro = "Não pode dividir por zero (0)";
+                }
+                else
+                {
+                    resultado = aux1 / aux2;    
+                }
+                
+                
+                break;
+            
+            default:
+                return BadRequest();
+                break;    
+        }
+        
+        ViewData["resultado"] = resultado;
+        ViewBag.mensagem = num1 + " "+op+" "+num2;
+        return View();
+    }
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

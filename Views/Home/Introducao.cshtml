@@ -4,30 +4,49 @@
 
 <h2>Mini Calculadora</h2>
 
-<div class="row">
-    <div class="col-md-4 col-xs-12">
-        <input type="number" class="form-control" />
+<form method="post">
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
+            <input name="num1" required step="0.01" type="number" class="form-control" />
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <select name="op" class="form-control">
+                <option>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <input name="num2" required step="0.01" type="number" class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <input type="submit" class="btn btn-primary form-control" value="Fazer o cálculo" />
+        </div>
     </div>
-    <div class="col-md-1 col-xs-12">
-        <select class="form-control">
-            <option>+</option>
-            <option>-</option>
-            <option>*</option>
-            <option>/</option>
-        </select>
+</form>
+
+@if (!string.IsNullOrEmpty(ViewBag.mensagem))
+{
+    <div>
+        <h4>A operação é: @ViewBag.mensagem</h4>    
     </div>
-    <div class="col-md-4 col-xs-12">
-        <input type="number" class="form-control" />
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.erro))
+{
+    <div>
+        <h4 class="text-warning">Erro: @ViewBag.erro</h4>
     </div>
-    <div class="col-md-2 col-xs-12">
-        <input type="button" onclick="calcula()" class="btn btn-primary form-control" value="Fazer o cálculo" />
-    </div>
-</div>
+}
+
+
+
 
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <label>Resultado</label>
-        <input class="form-control" />
+        <input class="form-control" value="@ViewData["resultado"]" />
     </div>
 </div>
 
