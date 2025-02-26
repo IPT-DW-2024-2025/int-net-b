@@ -31,6 +31,7 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Introducao(string num1, string num2, string op)
     {
+        CalculadoraResponseModel response = new CalculadoraResponseModel();
         double aux1, aux2, resultado = 0;
         
         double.TryParse(num1, out aux1);
@@ -66,9 +67,9 @@ public class HomeController : Controller
                 break;    
         }
         
-        ViewData["resultado"] = resultado;
-        ViewBag.mensagem = num1 + " "+op+" "+num2;
-        return View();
+        response.resultado = resultado.ToString();
+        response.descricaoOperacao = num1 + " "+op+" "+num2;
+        return View(response);
     }
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

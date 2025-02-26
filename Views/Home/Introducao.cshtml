@@ -1,3 +1,5 @@
+@model CalculadoraResponseModel
+
 @{
     ViewBag.Title = "title";
 }
@@ -26,13 +28,17 @@
     </div>
 </form>
 
-@if (!string.IsNullOrEmpty(ViewBag.mensagem))
+@if (Model != null)
 {
-    <div>
-        <h4>A operação é: @ViewBag.mensagem</h4>    
-    </div>
-}
+    @if (!string.IsNullOrEmpty(Model.descricaoOperacao))
+    {
+        <div>
+            <h4>A operação é: @Model.descricaoOperacao</h4>    
+        </div>
+    }
 
+    
+}
 @if (!string.IsNullOrEmpty(ViewBag.erro))
 {
     <div>
@@ -46,7 +52,14 @@
 <div class="row">
     <div class="col-md-4 col-xs-12">
         <label>Resultado</label>
-        <input class="form-control" value="@ViewData["resultado"]" />
+        @if (Model != null)
+        {
+            <input class="form-control" value="@Model.resultado" />    
+        }else
+        {
+            <input class="form-control" />
+        }
+        
     </div>
 </div>
 
